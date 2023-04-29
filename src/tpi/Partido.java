@@ -15,44 +15,47 @@ public class Partido {
     private int golesEquipo2;
     private Resultado resultado;
 
-    public String getEquipo1() {
-        return Equipo1;
+    public Partido(String Equipo1, String Equipo2, int golesEquipo1, int golesEquipo2) {
+        this.Equipo1 = Equipo1;
+        this.Equipo2 = Equipo2;
+        this.golesEquipo1 = golesEquipo1;
+        this.golesEquipo2 = golesEquipo2;
+        this.resultado = setResultado();
     }
 
-    public void setEquipo1(String Equipo1) {
-        this.Equipo1 = Equipo1;
+    public String getEquipo1() {
+        return Equipo1;
     }
 
     public String getEquipo2() {
         return Equipo2;
     }
 
-    public void setEquipo2(String Equipo2) {
-        this.Equipo2 = Equipo2;
-    }
-
     public int getGolesEquipo1() {
         return golesEquipo1;
-    }
-
-    public void setGolesEquipo1(int golesEquipo1) {
-        this.golesEquipo1 = golesEquipo1;
     }
 
     public int getGolesEquipo2() {
         return golesEquipo2;
     }
 
-    public void setGolesEquipo2(int golesEquipo2) {
-        this.golesEquipo2 = golesEquipo2;
-    }
-
     public Resultado getResultado() {
         return resultado;
     }
 
-    public void setResultado(Resultado resultado) {
-        this.resultado = resultado;
+    private Resultado setResultado() {
+        if (this.golesEquipo1>this.golesEquipo2)
+            this.resultado = Resultado.GANA1;
+        if(this.golesEquipo2>this.golesEquipo1)
+            this.resultado = Resultado.GANA2;
+        if(this.golesEquipo1 == this.golesEquipo2)
+            this.resultado = Resultado.EMPATE;
+        return this.resultado;
+    }
+
+    @Override
+    public String toString() {
+        return "Partido{" + "Equipo1=" + Equipo1 + ", Equipo2=" + Equipo2 + ", golesEquipo1=" + golesEquipo1 + ", golesEquipo2=" + golesEquipo2 + ", resultado=" + resultado + '}';
     }
     
     
