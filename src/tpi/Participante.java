@@ -14,14 +14,13 @@ import java.util.List;
 public class Participante {
     private String nombre;
     private int puntos;
-    private List<Partido> partidos;
+    private List<Pronostico> pronosticos;
 
     public Participante(String nombre) {
         this.nombre = nombre;
-        this.partidos = new ArrayList<>();
+        this.pronosticos = new ArrayList<>();
     }
     
-
     public String getNombre() {
         return nombre;
     }
@@ -30,18 +29,32 @@ public class Participante {
         return puntos;
     }
 
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
+    public void setPuntos(List<Ronda> rondas) {
+        List<Partido> partidos = new ArrayList<>();
+        for(Ronda ronda1 : rondas){
+            for(Partido partido1 : ronda1.getPartidos()){
+               partidos.add(partido1);
+            }
+        }
+        
+        for(int i = 0 ; i<partidos.size() ; i++){
+            if(partidos.get(i).getResultado() == pronosticos.get(i).getResultado())
+                this.puntos += 1; 
+        }
+        
     }
 
-    public List<Partido> getPartidos() {
-        return partidos;
+    public List<Pronostico> getPronosticos() {
+        return pronosticos;
     }
 
-    public void setPartidos(List<Partido> partidos) {
-        this.partidos = partidos;
+    public void setPronosticos(List<Pronostico> pronosticos) {
+        this.pronosticos = pronosticos;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Participante{" + "nombre=" + nombre + ", puntos=" + puntos + ", pronosticos=" + pronosticos + '}';
+    }
     
 }
